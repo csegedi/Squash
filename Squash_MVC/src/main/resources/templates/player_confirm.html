@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Confirmation Page</title>
+			
+			<style>
+		table, th, td {
+		border: 2px solid black;
+		border-collapse:collapse;
+		}
+		
+		</style>
+		
+		
+	</head>
+	
+	
+	<body>
+	
+		<p style="text-align:center" >Saving is completed!</p>
+		<br>
+		<p>You have saved the following data: </p>
+		<br>
+	
+			<table>
+	
+			<th>Name of the player</th>
+			<th>The generated password of the player</th>
+			<th>The status of the player</th>
+			
+		
+			<tr>
+		
+				<td th:text="${player.username}" ></td>
+				<td th:text="${player.password}" ></td>
+				<td th:text="${player.status}" ></td>
+				
+				
+			</tr>
+		
+			</table>
+		
+		<br>
+		<br>
+	
+			<form action="/admin" method="post">
+		   	 	<input type="hidden" name="adminName" th:value="${admin_Name}"/>
+		   		<input type="hidden" name="password" th:value="${pass_word}"/>
+		    <button>Go back</button>
+	    
+			</form>
+
+	</body>
+	
+	
+</html>

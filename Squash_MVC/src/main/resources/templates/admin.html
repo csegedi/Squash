@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Admin</title>
+	</head>
+	
+	<body>
+	
+		<h3 style="text-align:center"  >Welcome!</h3>
+		<h3 style="text-align:center"  th:text="${adminName}"></h3>
+	
+			<form action="/addLocation" method="post">
+			
+				<h4>Here you can add new locations to Database:</h4>
+	
+					<p>The name of the location:</p>
+					<input type="text" name="name">
+					
+					<br>
+					
+					<p>The address of the location:</p>
+					<input type="text" name="address">
+				
+					<br>
+					
+					<p>The rent  of the location (HUF):</p>
+					<input type="number" name="rent">
+					<br>
+					
+					<input type="hidden" name="password" th:value="${pass_word}">
+					<input type="hidden" name="adminName" th:value="${admin_Name}">
+					
+					<input type="submit" >
+	
+			</form>
+			
+			<br>
+			<br>
+			
+				<form action="/addPlayer" method="post">
+			
+				<h4>Here you can add new players to Database:</h4>
+	
+					<p>The name of the players:</p>
+					<input type="text" name="playerName">
+					
+					<br>
+					
+					<input type="hidden" name="password" th:value="${pass_word}">
+					<input type="hidden" name="adminName" th:value="${admin_Name}">
+					
+					<input type="submit" >
+	
+			</form>
+			
+			<br>
+			<br>
+			
+			<form action="/addContest" method="post">
+			
+				<h4>Here you can add new players to Database:</h4>
+	
+					<p>The players:</p>
+					<p>player 1:</p>
+					<input type="number" name="player1_id">
+					<p>player 2:</p>
+					<input type="number" name="player2_id">
+					<p>The identifier number of the location:</p>
+					<input type="number" name="location_id">
+					<p>The date of the contest:<p>
+					<input type="date" name="date">
+					<p>The result:</p>
+					<input type="text" name="result">
+					<p>And the winner is:</p>
+					<input type="number" name="winner">
+					
+					<br>
+					
+					<input type="hidden" name="password" th:value="${pass_word}">
+					<input type="hidden" name="adminName" th:value="${admin_Name}">
+					
+					<input type="submit" >
+	
+			</form>
+			
+			
+			
+			
+			
+			
+			
+	
+	</body>
+	
+	
+</html>

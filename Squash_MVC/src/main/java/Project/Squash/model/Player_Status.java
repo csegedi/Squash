@@ -1,6 +1,7 @@
 package Project.Squash.model;
 
-public enum Status {
-
+public enum Player_Status {
+	
 	ADMIN, PLAYER
+
 }

@@ -26,7 +26,7 @@ public class Player {
 	private String status; 
 	
 	@Column (name="password_flag")
-	private boolean password_flag;
+	private boolean password_flag; 
 
 	public int getId() {
 		return id;
@@ -52,6 +52,7 @@ public class Player {
 		this.password = password;
 	}
 
+
 	public String getStatus() {
 		return status;
 	}
@@ -70,10 +71,8 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player [id=" + id + ", username=" + username + ", password=" + password + ", status=" + status
-				+ ", password_flag=" + password_flag + "]";
-	} 
-	
-	
+		return "id:" + id + ", name:" + username + ", password";
+	}
+
 
 }

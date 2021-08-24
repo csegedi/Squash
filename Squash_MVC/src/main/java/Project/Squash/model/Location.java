@@ -19,7 +19,7 @@ public class Location {
 	@Column (name="name")
 	private String name; 
 	
-	@Column (name="adress")
+	@Column (name="address")
 	private String address; 
 	
 	@Column (name="rent")
@@ -59,7 +59,7 @@ public class Location {
 
 	@Override
 	public String toString() {
-		return "Location [id=" + id + ", name=" + name + ", address=" + address + ", rent=" + rent + "]";
+		return "id:" + id + ", name:" + name + ", address:" + address + ", rent:" + rent;
 	} 
 	
 

@@ -1,5 +1,9 @@
 package Project.Squash.model;
 
+
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table (name="contests")
@@ -20,20 +26,28 @@ public class Contest {
 	private int id; 
 	
 	@ManyToOne (fetch=FetchType.EAGER)
-	@JoinColumn (name="player_1_id")
+	@JoinColumn (name="player_1")
 	private Player player_1; 
 	
 	@ManyToOne (fetch=FetchType.LAZY)
-	@JoinColumn (name="player_2_id")
+	@JoinColumn (name="player_2")
 	private Player player_2; 
 	
 	@ManyToOne (fetch=FetchType.LAZY)
 	@JoinColumn (name="location_id")
 	private  Location location_id; 
 	
-	private String date; 
+	@Column (name="date")
+	@DateTimeFormat (pattern = "yyyy-MM-dd")
+	private Date date; 
+
 	
+	@Column (name="result")
 	private String result;
+	
+	@Column (name="winner")
+	private String winner; 
+	
 
 	public int getId() {
 		return id;
@@ -67,12 +81,22 @@ public class Contest {
 		this.location_id = location_id;
 	}
 
-	public String getDate() {
+
+
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public String getWinner() {
+		return winner;
+	}
+
+	public void setWinner(String winner) {
+		this.winner = winner;
 	}
 
 	public String getResult() {
@@ -86,9 +110,7 @@ public class Contest {
 	@Override
 	public String toString() {
 		return "Contest [id=" + id + ", player_1=" + player_1 + ", player_2=" + player_2 + ", location_id="
-				+ location_id + ", date=" + date + ", result=" + result + "]";
-	} 
-	
-	
+				+ location_id + ", date=" + date + ", result=" + result + ", winner=" + winner + "]";
+	}
 
 }
