@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Welcome</title>
+	</head>
+	
+	<body>
+	
+	<h4>All contests</h4>
+	<br>
+	<br>
+	
+		<table>
+		
+			<th>Player 1:</th>
+			<th>Player 2:</th>
+			<th>Location:</th>
+			<th>Date</th>
+			<th>Result</th>
+			<th>Winner</th>
+			
+			<tr th:each="contests_list:${contests}" >
+			
+				<td th:text="${contests.player_1.username}" ></td>
+				<td th:text="${contests.player_2.username}" ></td>
+				<td th:text="${local_list}" ></td>
+				<td th:text="${contests.date}" ></td>
+				<td th:text="${contests.result}" ></td>
+				<td th:text="${contests.winner}" ></td>
+			
+			</tr>
+	
+	
+		</table>
+	
+	
+	</body>
+	
+</html>

@@ -178,4 +178,84 @@ public class AppController {
 		
 	}
 	
+	@PostMapping("/player")
+	public String player (Model model, 
+			@RequestParam (name="playerName") String pName,
+			@RequestParam (name="playerPassword") String pPassword) {
+		
+		String page=""; 
+		Player player=null; 
+		Database db=new Database(); 
+		
+		List<Player>player_list=db.getPlayerByEntry(pName, pPassword); 
+		
+		for (int i=0; i<player_list.size(); i++) {
+			player=player_list.get(i); 
+		}
+		
+		if (player==null) {
+			page="failed_login"; 
+		}
+		else {
+			
+			if ((player.getStatus().equals(Player_Status.PLAYER.toString())) && player.isPassword_flag()==false  ) {
+			model.addAttribute("p_Name", pName); 
+			page="new_password.html";
+			
+		}
+		else if ((player.getStatus().equals(Player_Status.PLAYER.toString())) && player.isPassword_flag()==true) {
+			page="playerPage";
+		}
+		else {
+			page="failed_login.html"; 
+		}
+			
+			
+		}
+		
+		return page;
+		
+	}
+	
+	@PostMapping("password_confirm")
+	public String passwordConfirm (Model model, 
+			@RequestParam (name="newPassword") String newPassword,
+			@RequestParam (name="playerName") String pName) {
+		
+		Database db=new Database(); 
+		boolean value=true; 
+		db.updatePlayerPassword(pName, newPassword, value); 
+		
+		return "password_confirm.html";
+		
+	}
+	
+	@GetMapping ("/playerPage")
+	public String playerPage (Model model,
+			@RequestParam (name="playerName") String pName,
+			@RequestParam (name="playerPassword") String pPassword) {
+		
+		Database db=new Database();
+		
+		Location local=null;
+		List<Contest>contests=db.getAllContest(); 
+		System.out.println (contests.get(0).getPlayer_1().getUsername()); 
+	
+		List<Location>locations=null; 
+		 
+		
+		
+		for (int i=0; i<contests.size(); i++) {
+		 local=contests.get(i).getLocation_id(); 
+		 locations.add(local); 
+		}
+		
+		model.addAttribute("list", contests);
+		model.addAttribute("local-list", locations);
+		
+		
+		return "playerPage.html";
+		
+	}
+	
 }

@@ -10,6 +10,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import Project.Squash.model.Contest;
 import Project.Squash.model.Location;
@@ -193,12 +194,77 @@ public class Database {
 		return contest_list;
 	}
 	
+	public List<Player> getPlayerByEntry(String playerName, String playerPassword) {
+
+		List<Player> list=null; 
+		
+		Session session=sessionFactory.openSession(); 
+		session.beginTransaction(); 
+		
+		Query query=session.createNativeQuery("SELECT * FROM players WHERE username=:newName AND password=:newPassword", Player.class); 
+		query.setParameter("newName", playerName); 
+		query.setParameter("newPassword", playerPassword);
+		list=query.getResultList(); 
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		return list;
+	
+	}
+	
+	public void updatePlayerPassword(String playerName, String newPassword, boolean value) {
+		
+		Session session=sessionFactory.openSession(); 
+		session.beginTransaction(); 
+		
+		Query query=session.createNativeQuery("UPDATE players SET password=:newPassword, password_flag=:newValue " + "WHERE username=:newName", Player.class); 
+		query.setParameter("newName", playerName); 
+		query.setParameter("newPassword", newPassword);
+		query.setParameter("newValue", value);
+	
+		query.executeUpdate(); 
+		
+		session.getTransaction().commit();
+		session.close();
+		
+	}
+	@DateTimeFormat (pattern = "yyyy-MM-dd")
+	public List<Contest> getAllContest() {
+		
+		List<Contest> contestList=null; 
+	
+		Session session=sessionFactory.openSession(); 
+		session.beginTransaction(); 
+		
+		Query query=session.createNativeQuery("SELECT * FROM contestffffff");
+	
+		contestList=query.getResultList(); 
+		
+		
+		
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		return contestList;
+	}
+	
 	
 	
 	
 	public void close () {
 		sessionFactory.close();
 	}
+
+
+	
+
+
+	
+
+
+	
 
 
 	
