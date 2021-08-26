@@ -186,13 +186,18 @@ public class Database {
 	
 		Session session=sessionFactory.openSession(); 
 		session.beginTransaction(); 
-		
-		Query query=session.createNativeQuery("SELECT * FROM contests");
 	
+		Query query=session.createNativeQuery("SELECT * FROM contests", Contest.class);
+		
 		contestList=query.getResultList(); 
-		
-		
-		
+		for (int i=0; i<contestList.size(); i++) {
+			
+		System.out.println (contestList.get(i).getPlayer_2()); 
+		System.out.println (contestList.get(i).getLocation_id()); 
+		System.out.println (contestList.get(i).getWinner());
+			
+		}
+		 
 		session.getTransaction().commit();
 		session.close();
 		
@@ -200,9 +205,74 @@ public class Database {
 	}
 	
 	
+	public List <Contest> getContestsByPlayer(Player player) {
+		
+		List<Contest> contestList=null; 
+		
+		Session session=sessionFactory.openSession(); 
+		session.beginTransaction(); 
+	
+		Query query=session.createNativeQuery("SELECT * FROM contests WHERE player_1=:newPlayer1 OR player_2=:newPlayer2", Contest.class);
+		query.setParameter("newPlayer1", player); 
+		query.setParameter("newPlayer2", player);
+		
+		contestList=query.getResultList(); 
+		
+		for (int i=0; i<contestList.size(); i++) {
+				
+		System.out.println (contestList.get(i).getPlayer_2()); 
+		System.out.println (contestList.get(i).getLocation_id()); 
+			System.out.println (contestList.get(i).getWinner());
+				
+		}
+		 
+		session.getTransaction().commit();
+		session.close();
+		
+		return contestList;
+		
+	}
+	
+	public List<Contest> getContestsByLocation(Location location) {
+		
+		List<Contest> contestList=null; 
+		
+		Session session=sessionFactory.openSession(); 
+		session.beginTransaction(); 
+	
+		Query query=session.createNativeQuery("SELECT * FROM contests WHERE location_id=:newLocation" , Contest.class);
+		query.setParameter("newLocation", location); 
+		
+		
+		contestList=query.getResultList(); 
+		
+		for (int i=0; i<contestList.size(); i++) {
+				
+		System.out.println (contestList.get(i).getPlayer_2()); 
+		System.out.println (contestList.get(i).getLocation_id()); 
+			System.out.println (contestList.get(i).getWinner());
+				
+		}
+		 
+		session.getTransaction().commit();
+		session.close();
+		
+		return contestList;
+		
+	}
+	
+	
+	
+	
 	public void close () {
 		sessionFactory.close();
 	}
+
+
+	
+
+
+	
 
 
 	

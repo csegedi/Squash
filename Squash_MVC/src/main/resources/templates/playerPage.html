@@ -3,37 +3,91 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Welcome</title>
+		
+		<style>
+		table, th, td {
+		border: 2px solid black;
+		border-collapse:collapse;
+		}
+		
+		</style>
+		
+	
 	</head>
 	
 	<body>
 	
-	<h4>All contests</h4>
-	<br>
-	<br>
+		<h4>All contests</h4>
+		<br>
+		<br>
 	
-		<table>
+			<table>
+			
+				<th>Player 1:</th>
+				<th>Player 2:</th>
+				<th>Location:</th>
+				<th>Date</th>
+				<th>Result</th>
+				<th>Winner</th>
+				
+				<tr th:each="contests:${list}" >
+				
+					<td th:text="${contests.player_1.username}" ></td>
+					<td th:text="${contests.player_2.username}" ></td>
+					<td th:text="${contests.location_id.name}" ></td>
+					<td th:text="${contests.date}" ></td>
+					<td th:text="${contests.result}" ></td>
+					<td th:text="${contests.winner.username}" ></td>
+				
+				</tr>
 		
-			<th>Player 1:</th>
-			<th>Player 2:</th>
-			<th>Location:</th>
-			<th>Date</th>
-			<th>Result</th>
-			<th>Winner</th>
+			</table>
 			
-			<tr th:each="contests_list:${contests}" >
+		<br>
+		<br>
 			
-				<td th:text="${contests.player_1.username}" ></td>
-				<td th:text="${contests.player_2.username}" ></td>
-				<td th:text="${local_list}" ></td>
-				<td th:text="${contests.date}" ></td>
-				<td th:text="${contests.result}" ></td>
-				<td th:text="${contests.winner}" ></td>
+			<p>Here you can select a player</p>
 			
-			</tr>
-	
-	
-		</table>
-	
+			<form action="player/selectedPlayer" method="post">
+			
+				<select name="selected_player">
+					<option th:each="players:${player_list}" th:value="${players.id}" th:text=${players.username}  >
+					
+					</option>
+			
+				</select>
+				
+				<input type="submit"  > 
+			
+			</form>
+			
+			<br>
+			<br>
+			
+			<p>Here you can select a location</p>
+			
+			<form action="player/selectedLocation" method="post">
+			
+				<select name="selected_location">
+					<option th:each="locals:${local_list}" th:value="${locals.id}" th:text=${locals.name}  >
+					
+					</option>
+			
+				</select>
+				
+				<input type="submit"  > 
+				
+			<br>
+			<br>
+			
+			</form>
+			
+				<form action="/" method="get">
+		   	 	
+		    <button>Exit</button>
+		    
+			</form>
+			
 	
 	</body>
 	
