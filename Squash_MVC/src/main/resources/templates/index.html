@@ -11,16 +11,27 @@
 	
 	<body>
 	
-		<h3 style="text-align:center"> Welcome on our site!</h3>
+		<h3 style="text-align:center" >Welcome!</h3>
 	
-			<p>Click here to enter as administrator:</p>
-			<button type="button"  th:onclick="|window.location.href='/admin_login'|" >Admin</button>
+		<form action="/player" method="post">
+	
+				<p>username:</p>
+				<input type="text" name="username"  >
 			
-			<br>
-			<br>
+					<br>
+					<br>
+			
+				<p>password:</p>
+				<input type="text" name="password">
+					<br>
+					<br>
+			 	<input type="submit" formaction="/admin" value="Submit as Admin">
+					<br>
+					<br>
+				<input type="submit">
 	
-			<p>Click here to enter as player:</p>
-			<button type="button"  th:onclick="|window.location.href='/player_login'|" >Player</button>
+		</form>
+	
 	
 	</body>
 

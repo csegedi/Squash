@@ -47,9 +47,24 @@ public class Contest {
 	@Column (name="result")
 	private String result;
 	
-	@Column (name="winner")
-	private String winner; 
+	@ManyToOne (fetch=FetchType.LAZY)
+	@JoinColumn (name="winner")
+	private Player winner; 
 	
+	
+	public Contest () {
+		
+	}
+	
+	public Contest(Player player_1, Player player_2, Location location_id, Date date, String result, Player winner) {
+		super();
+		this.player_1 = player_1;
+		this.player_2 = player_2;
+		this.location_id = location_id;
+		this.date = date;
+		this.result = result;
+		this.winner = winner;
+	}
 
 	public int getId() {
 		return id;
@@ -93,11 +108,11 @@ public class Contest {
 		this.date = date;
 	}
 
-	public String getWinner() {
+	public Player getWinner() {
 		return winner;
 	}
 
-	public void setWinner(String winner) {
+	public void setWinner(Player winner) {
 		this.winner = winner;
 	}
 

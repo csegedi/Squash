@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Table (name="locations")
 public class Location {
 	
+	
 	@Id
 	@Column (name="id")
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -24,7 +25,19 @@ public class Location {
 	
 	@Column (name="rent")
 	private int rent;
-
+	
+	public Location () {
+		
+	}
+	
+	public Location(String name, String address, int rent) {
+		
+		this.name=name; 
+		this.address=address; 
+		this.rent=rent; 
+		
+	}
+	
 	public int getId() {
 		return id;
 	}

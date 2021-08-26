@@ -2,6 +2,8 @@ package Project.Squash.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,10 +25,23 @@ public class Player {
 	private String password; 
 	
 	@Column (name="status")
-	private String status; 
+	@Enumerated(EnumType.STRING)
+	private Player_Status status; 
 	
 	@Column (name="password_flag")
 	private boolean password_flag; 
+	
+	public Player () {
+		
+	}
+	
+	public Player(String username, String password, Player_Status status, boolean password_flag) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.status = status;
+		this.password_flag = password_flag;
+	}
 
 	public int getId() {
 		return id;
@@ -53,11 +68,11 @@ public class Player {
 	}
 
 
-	public String getStatus() {
+	public Player_Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Player_Status status) {
 		this.status = status;
 	}
 

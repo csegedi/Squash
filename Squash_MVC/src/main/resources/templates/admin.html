@@ -10,7 +10,7 @@
 		<h3 style="text-align:center"  >Welcome!</h3>
 		<h3 style="text-align:center"  th:text="${adminName}"></h3>
 	
-			<form action="/addLocation" method="post">
+			<form action="admin/addLocation" method="post">
 			
 				<h4>Here you can add new locations to Database:</h4>
 	
@@ -27,10 +27,7 @@
 					<p>The rent  of the location (HUF):</p>
 					<input type="number" name="rent">
 					<br>
-					
-					<input type="hidden" name="password" th:value="${pass_word}">
-					<input type="hidden" name="adminName" th:value="${admin_Name}">
-					
+					<br>
 					<input type="submit" >
 	
 			</form>
@@ -38,7 +35,7 @@
 			<br>
 			<br>
 			
-				<form action="/addPlayer" method="post">
+				<form action="admin/addPlayer" method="post">
 			
 				<h4>Here you can add new players to Database:</h4>
 	
@@ -46,9 +43,7 @@
 					<input type="text" name="playerName">
 					
 					<br>
-					
-					<input type="hidden" name="password" th:value="${pass_word}">
-					<input type="hidden" name="adminName" th:value="${admin_Name}">
+					<br>
 					
 					<input type="submit" >
 	
@@ -57,38 +52,32 @@
 			<br>
 			<br>
 			
-			<form action="/addContest" method="post">
+			<form action="admin/addContest" method="post">
 			
-				<h4>Here you can add new players to Database:</h4>
+				<h4>Here you can add new contests to Database:</h4>
 	
 					<p>The players:</p>
-					<p>player 1:</p>
+					<p>player 1 </p>
 					<input type="number" name="player1_id">
-					<p>player 2:</p>
+					<p>player 2 </p>
 					<input type="number" name="player2_id">
-					<p>The identifier number of the location:</p>
+					<p>The identifier number of the location </p>
 					<input type="number" name="location_id">
-					<p>The date of the contest:<p>
+					<p>The date of the contest <p>
 					<input type="date" name="date">
-					<p>The result:</p>
+					<p>The result </p>
 					<input type="text" name="result">
-					<p>And the winner is:</p>
+					<p>And the winner is </p>
 					<input type="number" name="winner">
 					
 					<br>
 					
-					<input type="hidden" name="password" th:value="${pass_word}">
-					<input type="hidden" name="adminName" th:value="${admin_Name}">
-					
+					<input type="hidden" name="password" th:value="${password}">
+					<input type="hidden" name="adminName" th:value="${username}">
+					<br>
 					<input type="submit" >
 	
 			</form>
-			
-			
-			
-			
-			
-			
 			
 	
 	</body>

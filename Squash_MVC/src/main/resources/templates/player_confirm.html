@@ -45,10 +45,19 @@
 		<br>
 	
 			<form action="/admin" method="post">
-		   	 	<input type="hidden" name="adminName" th:value="${admin_Name}"/>
-		   		<input type="hidden" name="password" th:value="${pass_word}"/>
+		   	 	<input type="hidden" name="username" th:value="${name}"/>
+		   		<input type="hidden" name="password" th:value="${pass}"/>
 		    <button>Go back</button>
 	    
+			</form>
+			
+		<br>
+		<br>	
+			
+			<form action="/" method="get">
+		   	 	
+		    <button>Exit</button>
+		    
 			</form>
 
 	</body>

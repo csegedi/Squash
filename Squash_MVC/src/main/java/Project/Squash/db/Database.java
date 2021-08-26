@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -15,6 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import Project.Squash.model.Contest;
 import Project.Squash.model.Location;
 import Project.Squash.model.Player;
+import Project.Squash.model.Player_Status;
 
 public class Database {
 	
@@ -64,25 +68,7 @@ public class Database {
 		
 	}
 	
-	public List <Location> getLocation(String name, String address, int rent) {
-		
-		List<Location> list=null; 
-		
-		Session session=sessionFactory.openSession(); 
-		session.beginTransaction(); 
-		
-		Query query=session.createNativeQuery("SELECT * FROM locations WHERE name=:newName AND address=:newAddress AND rent=:newRent", Location.class); 
-		query.setParameter("newName", name); 
-		query.setParameter("newAddress", address); 
-		query.setParameter("newRent", rent);
-		list=query.getResultList(); 
-		
-		session.getTransaction().commit();
-		session.close();
-		
-		return list;
-	}
-	
+
 	public void insertPlayer(String playerName, String generatedPassword, String status, boolean value) {
 		
 		Session session=sessionFactory.openSession(); 
@@ -91,7 +77,10 @@ public class Database {
 		Query query=session.createNativeQuery("INSERT INTO players  (username, password, status, password_flag) VALUES (:newName, :newPassword, :newStatus, :newPasswordFlag) "); 
 		query.setParameter("newName", playerName); 
 		query.setParameter("newPassword", generatedPassword); 
+		
+		
 		query.setParameter("newStatus", status);
+		
 		query.setParameter("newPasswordFlag", value);
 		query.executeUpdate(); 
 		
@@ -100,25 +89,8 @@ public class Database {
 		
 	}
 	
-	public List <Player> getPlayer(String playerName, String status) {
-		
-		List <Player> playerList=null;
-		
-		Session session=sessionFactory.openSession(); 
-		session.beginTransaction(); 
-		
-		Query query=session.createNativeQuery("SELECT * FROM players WHERE username=:newName AND status=:newStatus", Player.class); 
-		query.setParameter("newName", playerName); 
-		query.setParameter("newStatus", status);
-		playerList=query.getResultList(); 
-		
-		session.getTransaction().commit();
-		session.close();
-
-		return playerList;
-	}
 	
-	public Player getPlayerById(int player_1_id) {
+	public Player getPlayersById(int player_1_id) {
 		
 		Player player=null; 
 		
@@ -126,7 +98,6 @@ public class Database {
 		session.beginTransaction(); 
 		
 		player=session.get(Player.class, player_1_id); 
-		
 		
 		session.getTransaction().commit();
 		session.close();
@@ -136,7 +107,7 @@ public class Database {
 		
 	}
 	
-	public Location getLocationById(int location_id) {
+	public Location getLocationsById(int location_id) {
 		
 		Location location=null; 
 		
@@ -172,29 +143,8 @@ public class Database {
 		
 	}
 	
-	public List<Contest> getContest(int player_1_id, int player_2_id, int location_id, Date date, String result, int winner) {
-		
-		List<Contest> contest_list=null; 
-		
-		Session session=sessionFactory.openSession(); 
-		session.beginTransaction(); 
-		Query query=session.createNativeQuery("SELECT * FROM contests WHERE player_1=:newPlayer_1 AND player_2=:newPlayer_2 AND location_id=:newLocation_id AND date=:newDate AND result=:newResult AND winner=:newWinner", Contest.class);
-		query.setParameter("newPlayer_1", player_1_id); 
-		query.setParameter("newPlayer_2", player_2_id); 
-		query.setParameter("newLocation_id", location_id);
-		query.setParameter("newDate", date);
-		query.setParameter("newResult", result );
-		query.setParameter("newWinner", winner);
-		
-		contest_list=query.getResultList(); 
-		
-		session.getTransaction().commit();
-		session.close();
-		
-		return contest_list;
-	}
 	
-	public List<Player> getPlayerByEntry(String playerName, String playerPassword) {
+	public List<Player> getPlayersByEntry(String playerName, String playerPassword) {
 
 		List<Player> list=null; 
 		
@@ -230,17 +180,16 @@ public class Database {
 		
 	}
 	@DateTimeFormat (pattern = "yyyy-MM-dd")
-	public List<Contest> getAllContest() {
+	public List<Contest> getAllContests() {
 		
 		List<Contest> contestList=null; 
 	
 		Session session=sessionFactory.openSession(); 
 		session.beginTransaction(); 
 		
-		Query query=session.createNativeQuery("SELECT * FROM contestffffff");
+		Query query=session.createNativeQuery("SELECT * FROM contests");
 	
 		contestList=query.getResultList(); 
-		
 		
 		
 		
@@ -249,8 +198,6 @@ public class Database {
 		
 		return contestList;
 	}
-	
-	
 	
 	
 	public void close () {
