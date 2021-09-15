@@ -5,13 +5,12 @@
 		<title>Confirmation Page</title>
 			
 			<style>
-		table, th, td {
-		border: 2px solid black;
-		border-collapse:collapse;
-		}
+				table, th, td {
+				border: 2px solid black;
+				border-collapse:collapse;
+				}
 		
-		</style>
-		
+			</style>
 		
 	</head>
 	
@@ -19,17 +18,16 @@
 	<body>
 	
 		<p style="text-align:center" >Saving is completed!</p>
-		<br>
-		<p>You have saved the following data: </p>
-		<br>
+			<br>
+				<p>You have saved the following data: </p>
+			<br>
 	
 			<table>
 	
-			<th>Name of the player</th>
-			<th>The generated password of the player</th>
-			<th>The status of the player</th>
+				<th>Name of the player</th>
+				<th>The generated password of the player</th>
+				<th>The status of the player</th>
 			
-		
 			<tr>
 		
 				<td th:text="${player.username}" ></td>
@@ -45,9 +43,8 @@
 		<br>
 	
 			<form action="/admin" method="post">
-		   	 	<input type="hidden" name="username" th:value="${name}"/>
-		   		<input type="hidden" name="password" th:value="${pass}"/>
-		    <button>Go back</button>
+		   	 	
+		    	<button>Go back</button>
 	    
 			</form>
 			
@@ -56,7 +53,7 @@
 			
 			<form action="/" method="get">
 		   	 	
-		    <button>Exit</button>
+		   		 <button>Exit</button>
 		    
 			</form>
 

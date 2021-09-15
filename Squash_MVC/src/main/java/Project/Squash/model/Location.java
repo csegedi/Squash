@@ -8,36 +8,35 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table (name="locations")
+@Table(name = "locations")
 public class Location {
-	
-	
+
 	@Id
-	@Column (name="id")
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int id; 
-	
-	@Column (name="name")
-	private String name; 
-	
-	@Column (name="address")
-	private String address; 
-	
-	@Column (name="rent")
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "address")
+	private String address;
+
+	@Column(name = "rent")
 	private int rent;
-	
-	public Location () {
-		
+
+	public Location() {
+
 	}
-	
+
 	public Location(String name, String address, int rent) {
-		
-		this.name=name; 
-		this.address=address; 
-		this.rent=rent; 
-		
+
+		this.name = name;
+		this.address = address;
+		this.rent = rent;
+
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -73,7 +72,6 @@ public class Location {
 	@Override
 	public String toString() {
 		return "id:" + id + ", name:" + name + ", address:" + address + ", rent:" + rent;
-	} 
-	
+	}
 
 }

@@ -5,10 +5,10 @@
 		<title>Confirmation Page</title>
 			
 			<style>
-		table, th, td {
-		border: 2px solid black;
-		border-collapse:collapse;
-		}
+				table, th, td {
+				border: 2px solid black;
+				border-collapse:collapse;
+				}
 		
 		</style>
 		
@@ -19,50 +19,49 @@
 	<body>
 	
 		<p style="text-align:center" >Saving is completed!</p>
-		<br>
-		<p>You have saved the following data: </p>
-		<br>
+			<br>
+				<p>You have saved the following data: </p>
+			<br>
 	
 			<table>
 	
-			<th>Player 1 id:</th>
-			<th>Player 2 id</th>
-			<th>Location id:</th>
-			<th>Date</th>
-			<th>Result</th>
-			<th>Winner</th>
+				<th>Player 1 id:</th>
+				<th>Player 2 id</th>
+				<th>Location id:</th>
+				<th>Date</th>
+				<th>Result</th>
+				<th>Winner</th>
 		
-			<tr>
+				<tr>
 		
-				<td th:text="${contest.player_1.id}" ></td>
-				<td th:text="${contest.player_2.id}" ></td>
-				<td th:text="${contest.location_id.id}" ></td>
-				<td th:text="${contest.date}" ></td>
-				<td th:text="${contest.result}" ></td>
-				<td th:text="${contest.winner.id}" ></td>
+					<td th:text="${contest.player_1.id}" ></td>
+					<td th:text="${contest.player_2.id}" ></td>
+					<td th:text="${contest.location_id.id}" ></td>
+					<td th:text="${contest.date}" ></td>
+					<td th:text="${contest.result}" ></td>
+					<td th:text="${contest.winner.id}" ></td>
 				
-			</tr>
+				</tr>
 		
 			</table>
 		
-		<br>
-		<br>
+			<br>
+			<br>
 	
-			<form action="/admin" method="post">
-		   	 	<input type="hidden" name="username" th:value="${name}"/>
-		   		<input type="hidden" name="password" th:value="${pass}"/>
-		    <button>Go back</button>
-	    
-			</form>
-			
-		<br>
-		<br>	
-			
-			<form action="/" method="get">
+				<form action="/admin" method="post">
 		   	 	
-		    <button>Exit</button>
-		    
-			</form>
+		  	  		<button>Go back</button>
+	    
+				</form>
+			
+			<br>
+			<br>	
+			
+				<form action="/" method="get">
+			   	 	
+			   		 <button>Exit</button>
+			    
+				</form>
 			
 
 	</body>

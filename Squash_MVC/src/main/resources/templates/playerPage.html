@@ -18,75 +18,75 @@
 	<body>
 	
 		<h4>All contests</h4>
-		<br>
-		<br>
+			<br>
+			<br>
 	
-			<table>
-			
-				<th>Player 1:</th>
-				<th>Player 2:</th>
-				<th>Location:</th>
-				<th>Date</th>
-				<th>Result</th>
-				<th>Winner</th>
+				<table>
 				
-				<tr th:each="contests:${list}" >
-				
-					<td th:text="${contests.player_1.username}" ></td>
-					<td th:text="${contests.player_2.username}" ></td>
-					<td th:text="${contests.location_id.name}" ></td>
-					<td th:text="${contests.date}" ></td>
-					<td th:text="${contests.result}" ></td>
-					<td th:text="${contests.winner.username}" ></td>
-				
-				</tr>
-		
-			</table>
-			
-		<br>
-		<br>
-			
-			<p>Here you can select a player</p>
-			
-			<form action="player/selectedPlayer" method="post">
-			
-				<select name="selected_player">
-					<option th:each="players:${player_list}" th:value="${players.id}" th:text=${players.username}  >
+					<th>Player 1:</th>
+					<th>Player 2:</th>
+					<th>Location:</th>
+					<th>Date</th>
+					<th>Result</th>
+					<th>Winner</th>
 					
-					</option>
-			
-				</select>
-				
-				<input type="submit"  > 
-			
-			</form>
-			
-			<br>
-			<br>
-			
-			<p>Here you can select a location</p>
-			
-			<form action="player/selectedLocation" method="post">
-			
-				<select name="selected_location">
-					<option th:each="locals:${local_list}" th:value="${locals.id}" th:text=${locals.name}  >
+					<tr th:each="contests:${list}" >
 					
-					</option>
+						<td th:text="${contests.player_1.username}" ></td>
+						<td th:text="${contests.player_2.username}" ></td>
+						<td th:text="${contests.location_id.name}" ></td>
+						<td th:text="${contests.date}" ></td>
+						<td th:text="${contests.result}" ></td>
+						<td th:text="${contests.winner.username}" ></td>
+					
+					</tr>
 			
-				</select>
+				</table>
+			
+			<br>
+			<br>
+			
+				<p>Here you can select a player</p>
+			
+					<form action="player/selectedPlayer" method="post">
+			
+						<select name="selected_player">
+							<option th:each="players:${player_list}" th:value="${players.id}" th:text=${players.username}  >
+							
+							</option>
+					
+						</select>
 				
-				<input type="submit"  > 
+							<input type="submit"  > 
+			
+					</form>
+			
+			<br>
+			<br>
+			
+				<p>Here you can select a location</p>
+			
+					<form action="player/selectedLocation" method="post">
+			
+						<select name="selected_location">
+							<option th:each="locals:${local_list}" th:value="${locals.id}" th:text=${locals.name}  >
+							
+							</option>
+					
+						</select>
+				
+							<input type="submit"  > 
 				
 			<br>
 			<br>
 			
-			</form>
-			
-				<form action="/" method="get">
-		   	 	
-		    <button>Exit</button>
-		    
-			</form>
+					</form>
+					
+						<form action="/" method="get">
+				   	 	
+				   		 <button>Exit</button>
+				    
+					</form>
 			
 	
 	</body>

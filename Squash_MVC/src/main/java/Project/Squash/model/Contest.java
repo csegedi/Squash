@@ -1,7 +1,5 @@
 package Project.Squash.model;
 
-
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,43 +17,41 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table (name="contests")
+@Table(name = "contests")
 public class Contest {
-	
-	@Id
-	@Column (name="id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id; 
-	
-	@ManyToOne (fetch=FetchType.EAGER)
-	@JoinColumn (name="player_1")
-	private Player player_1; 
-	
-	@ManyToOne (fetch=FetchType.LAZY)
-	@JoinColumn (name="player_2")
-	private Player player_2; 
-	
-	@ManyToOne (fetch=FetchType.LAZY)
-	@JoinColumn (name="location_id")
-	private  Location location_id; 
-	
-	@Column (name="date")
-	@DateTimeFormat (pattern = "yyyy-MM-dd")
-	private Date date; 
 
-	
-	@Column (name="result")
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "player_1")
+	private Player player_1;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "player_2")
+	private Player player_2;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "location_id")
+	private Location location_id;
+
+	@Column(name = "date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date date;
+
+	@Column(name = "result")
 	private String result;
-	
-	@ManyToOne (fetch=FetchType.LAZY)
-	@JoinColumn (name="winner")
-	private Player winner; 
-	
-	
-	public Contest () {
-		
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "winner")
+	private Player winner;
+
+	public Contest() {
+
 	}
-	
+
 	public Contest(Player player_1, Player player_2, Location location_id, Date date, String result, Player winner) {
 		super();
 		this.player_1 = player_1;
@@ -97,8 +93,6 @@ public class Contest {
 	public void setLocation_id(Location location_id) {
 		this.location_id = location_id;
 	}
-
-
 
 	public Date getDate() {
 		return date;

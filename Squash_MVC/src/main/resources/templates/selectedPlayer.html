@@ -14,9 +14,7 @@
 		
 	</head>
 	
-	
 	<body>
-	
 			<table>
 			
 				<th>Player 1:</th>
@@ -26,16 +24,16 @@
 				<th>Result</th>
 				<th>Winner</th>
 				
-				<tr th:each="contests:${contestsList}" >
-				
-					<td th:text="${contests.player_1.username}" ></td>
-					<td th:text="${contests.player_2.username}" ></td>
-					<td th:text="${contests.location_id.name}" ></td>
-					<td th:text="${contests.date}" ></td>
-					<td th:text="${contests.result}" ></td>
-					<td th:text="${contests.winner.username}" ></td>
-				
-				</tr>
+					<tr th:each="contests:${contestsList}" >
+					
+						<td th:text="${contests.player_1.username}" ></td>
+						<td th:text="${contests.player_2.username}" ></td>
+						<td th:text="${contests.location_id.name}" ></td>
+						<td th:text="${contests.date}" ></td>
+						<td th:text="${contests.result}" ></td>
+						<td th:text="${contests.winner.username}" ></td>
+					
+					</tr>
 		
 			</table>
 			
@@ -44,19 +42,17 @@
 			<br>
 	
 			<form action="/player" method="post">
-		   	 	<input type="hidden" name="username" th:value="${name}"/>
-		   		<input type="hidden" name="password" th:value="${pass}"/>
-		   	 <button>Go back</button>
+		   	 
+		   	 	<button>Go back</button>
 	    
 			</form>
 			
-			<form action="/" method="get">
+				<form action="/" method="get">
 		   	 	
-		    <button>Exit</button>
+		    	<button>Exit</button>
 		    
 			</form>
-	
-	
+
 	</body>
 	
 	

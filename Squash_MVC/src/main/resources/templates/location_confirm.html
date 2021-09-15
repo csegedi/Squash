@@ -4,12 +4,12 @@
 		<meta charset="UTF-8">
 		<title>Confirmation Page</title>
 			
-			<style>
-		table, th, td {
-		border: 2px solid black;
-		border-collapse:collapse;
-		}
-		
+		<style>
+			table, th, td {
+			border: 2px solid black;
+			border-collapse:collapse;
+			}
+			
 		</style>
 		
 		
@@ -19,47 +19,46 @@
 	<body>
 	
 		<p style="text-align:center" >Saving is completed!</p>
-		<br>
-		<p>You have saved the following data: </p>
-		<br>
+			<br>
+				<p>You have saved the following data: </p>
+			<br>
 	
 			<table>
 	
-			<th>Name of the location</th>
-			<th>The address of the location</th>
-			<th>Sum of the rent (HUF)</th>
-			<th>Sum of the rent (EUR)</th>
+				<th>Name of the location</th>
+				<th>The address of the location</th>
+				<th>Sum of the rent (HUF)</th>
+				<th>Sum of the rent (EUR)</th>
 		
-			<tr>
-		
-				<td th:text="${location.name}" ></td>
-				<td th:text="${location.address}" ></td>
-				<td th:text="${location.rent}" ></td>
-				<td th:text="${EUR}" ></td>
-				
-		
-			</tr>
+				<tr>
+			
+					<td th:text="${location.name}" ></td>
+					<td th:text="${location.address}" ></td>
+					<td th:text="${location.rent}" ></td>
+					<td th:text="${EUR}" ></td>
+					
+			
+				</tr>
 		
 			</table>
 		
-		<br>
-		<br>
+			<br>
+			<br>
 	
-			<form action="/admin" method="post">
-		   	 	<input type="hidden" name="username" th:value="${name}"/>
-		   		<input type="hidden" name="password" th:value="${pass}"/>
-		    <button>Go back</button>
+				<form action="/admin" method="post">
+		   		
+		   		 	<button>Go back</button>
 		    
-		    </form>
+		    	</form>
 		    
 		    <br>
 		    <br>
 		    
-		    <form action="/delete" method="get">
-		   	 	
-		    <button>Exit</button>
-		    
-			</form>
+			    <form action="/delete" method="get">
+			   	 	
+			    	<button>Exit</button>
+			    
+				</form>
 
 	</body>
 	

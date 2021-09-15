@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,26 +44,43 @@ public class AppController_Admin {
 	}
 
 	@PostMapping("/admin")
-	public String adminPage(Model model, 
-			@RequestParam(name = "username") String adminName,
-			@RequestParam(name = "password") String password,
+	public String adminPage(Model model,
+			@RequestParam(required = false, name = "username") String adminName,
+			@RequestParam(required = false, name = "password") String password,
+			@CookieValue(required = false, value = "cookie_status") String incomingStatus,
 			HttpServletResponse response) {
 
 		Database db = new Database();
 		String returnPage = "";
+		Player admin=null; 
 
-		List<Player> list_of_admins = db.getAdmins(adminName, password);
+		/** CHECK THE ADMIN'S ENTRY */
 
-		if (list_of_admins.isEmpty()) {
+		List<Player> list_of_admins = db.getPlayersByEntry(adminName, password);
+		
+		for (int listIndex=0; listIndex<list_of_admins.size(); listIndex++) {
+			if (list_of_admins.get(listIndex).getStatus()==Player_Status.ADMIN) {
+				admin=list_of_admins.get(listIndex); 
+				break; 
+			}
+		}
+		
+
+		if (admin==null && (incomingStatus == null)) { // first entry: wrong username or password
 			returnPage = "failed_login.html";
+
 		}
 
-		else {
+		else if (admin==null && (incomingStatus != null)) { // backward from another pages
 
-			Cookie cookie = new Cookie("cookie_username", adminName);
-			Cookie cookie2 = new Cookie("cookie_password", password);
+			returnPage = "admin.html";
+		}
+
+		else if (admin!=null) {
+
+			String status = Player_Status.ADMIN.toString(); // first entry: correct username and password
+			Cookie cookie = new Cookie("cookie_status", status);
 			response.addCookie(cookie);
-			response.addCookie(cookie2);
 
 			returnPage = "admin.html";
 
@@ -76,89 +94,140 @@ public class AppController_Admin {
 
 	@PostMapping("admin/addLocation")
 	public String addLocation(Model model,
-			@RequestParam(name = "name") String name, @RequestParam(name = "address") String address,
-			@RequestParam(name = "rent") int rent, @CookieValue(value = "cookie_username") String userName,
-			@CookieValue(value = "cookie_password") String password) {
+			@RequestParam(required = false, name = "name") String name,
+			@RequestParam(required = false, name = "address") String address,
+			@RequestParam(required = false, name = "rent") Integer rent,
+			@CookieValue(value = "cookie_status") String status) {
 
 		Database db = new Database();
+		String returnPage = null;
 
-		db.insertLocation(name, address, rent);
+		if (name.isEmpty() == false && address.isEmpty() == false && rent != null) {
 
-		Location location = new Location(name, address, rent);
+			db.insertLocation(name, address, rent);
 
-		RestTemplate restTemplate = new RestTemplate();
-		String currency = restTemplate.getForObject("http://localhost:8080/rest", String.class);
-		currency.replace(',', '.');
-		double changed = Double.parseDouble(currency);
-		double rent_in_EUR = (rent / changed);
+			Location location = new Location(name, address, rent);
 
-		model.addAttribute("location", location);
-		model.addAttribute("EUR", rent_in_EUR);
-		model.addAttribute("name", userName);
-		model.addAttribute("pass", password);
+			RestTemplate restTemplate = new RestTemplate();
+			String currency = restTemplate.getForObject("http://localhost:8080/rest", String.class);
+			currency.replace(',', '.');
+			double changed = Double.parseDouble(currency);
+			double rent_in_EUR = (rent / changed);
+
+			model.addAttribute("location", location);
+			model.addAttribute("EUR", rent_in_EUR);
+			returnPage = "location_confirm.html";
+
+		}
+
+		else {
+
+			returnPage = "wrongInput.html";
+		}
 
 		db.close();
 
-		return "location_confirm.html";
-
+		return returnPage;
 	}
 
 	@PostMapping("admin/addPlayer")
-	public String addPlayer(Model model, 
+	public String addPlayer(Model model,
 			@RequestParam(name = "playerName") String playerName,
-			@CookieValue(value = "cookie_username") String userName,
-			@CookieValue(value = "cookie_password") String password) {
+			@CookieValue(value = "cookie_status") String incomingStatus) {
 
 		Database db = new Database();
+		String returnPage = null;
 
-		int randomNumber = new Random().nextInt(100) + 1;
-		String generatedPassword = (playerName + randomNumber);
-		Player_Status status = Player_Status.PLAYER;
-		boolean initValue = false;
+		/** SET THE FIRST PROPERTIES OF THE PLAYER BY THE ADMIN */
 
-		db.insertPlayer(playerName, generatedPassword, status.toString(), initValue);
+		if (playerName.isEmpty() == false) {
 
-		Player player = new Player(playerName, generatedPassword, status, initValue);
+			int randomNumber = new Random().nextInt(100) + 1; // generating password (the player should this change
+																// later)
+			String generatedPassword = (playerName + randomNumber);
+			Player_Status status = Player_Status.PLAYER;
+			boolean initValue = false; // this shows the password flag
 
-		model.addAttribute("player", player);
-		model.addAttribute("name", userName);
-		model.addAttribute("pass", password);
+			db.insertPlayer(playerName, generatedPassword, status.toString(), initValue);
+
+			Player player = new Player(playerName, generatedPassword, status, initValue);
+
+			model.addAttribute("player", player);
+			returnPage = "player_confirm.html";
+
+		}
+
+		else {
+
+			returnPage = "wrongInput.html";
+
+		}
 
 		db.close();
 
-		return "player_confirm.html";
-
+		return returnPage;
 	}
 
 	@PostMapping("admin/addContest")
-	public String addContest(Model model, 
-			@CookieValue(value = "cookie_username") String userName,
-			@CookieValue(value = "cookie_password") String password, 
-			@RequestParam(name = "player1_id") int player_1_id,
-			@RequestParam(name = "player2_id") int player_2_id,
-			@RequestParam(name = "location_id") int location_id,
-			@RequestParam(name = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
-			@RequestParam(name = "result") String result, 
-			@RequestParam(name = "winner") int winner_id) {
+	public String addContest(Model model,
+			@RequestParam(required = false, name = "player1_id") Integer player_1_id,
+			@RequestParam(required = false, name = "player2_id") Integer player_2_id,
+			@RequestParam(required = false, name = "location_id") Integer location_id,
+			@RequestParam(required = false, name = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+			@RequestParam(required = false, name = "result") String result,
+			@RequestParam(required = false, name = "winner") Integer winner_id,
+			@CookieValue(value = "cookie_status") String incomingStatus) {
 
 		Database db = new Database();
+		String returnPage = null;
+		Player player_1 = null;
+		Player player_2 = null;
+		Player winner = null;
 
-		db.insertContest(player_1_id, player_2_id, location_id, date, result, winner_id);
+		if ((player_1_id != null) && (player_2_id != null) && (location_id != null) && (result.isEmpty() == false)
+				&& (winner_id != null)) { // check 1: the admin should fill every field
 
-		Player player_1 = db.getPlayersById(player_1_id);
-		Player player_2 = db.getPlayersById(player_2_id);
-		Player winner = db.getPlayersById(winner_id);
-		Location location = db.getLocationsById(location_id);
+			player_1 = db.getPlayersById(player_1_id);
+			player_2 = db.getPlayersById(player_2_id);
 
-		Contest contest = new Contest(player_1, player_2, location, date, result, winner);
+			if ((winner_id == player_1_id) || (winner_id == player_2_id)) { // check the winner: winner should be a
+																			// participant
 
-		model.addAttribute("contest", contest);
-		model.addAttribute("name", userName);
-		model.addAttribute("pass", password);
+				winner = db.getPlayersById(winner_id);
+			}
+
+			else {
+
+				returnPage = "wrongInput.html";
+			}
+
+			Location location = db.getLocationsById(location_id);
+
+			if ((player_1 != null) && (player_2 != null) && (winner != null) && (location != null)) { // check 2: for example the id is missing in the Database
+				
+				db.insertContest(player_1, player_2, location, date, result, winner);
+
+				Contest contest = new Contest(player_1, player_2, location, date, result, winner);
+				model.addAttribute("contest", contest);
+				returnPage = "contest_confirm.html";
+
+			}
+
+			else {
+
+				returnPage = "wrongInput.html";
+			}
+
+		}
+
+		else {
+
+			returnPage = "wrongInput.html";
+		}
 
 		db.close();
 
-		return "contest_confirm.html";
+		return returnPage;
 
 	}
 

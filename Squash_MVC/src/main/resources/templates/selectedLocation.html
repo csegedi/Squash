@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta charset="UTF-8">
-	<title>Selected Location</title>
-	
-	<style>
-		table, th, td {
-		border: 2px solid black;
-		border-collapse:collapse;
-		}
+		<meta charset="UTF-8">
+		<title>Selected Location</title>
 		
-		</style>
+		<style>
+			table, th, td {
+			border: 2px solid black;
+			border-collapse:collapse;
+			}
+			
+			</style>
 	
 	</head>
 
@@ -26,52 +26,49 @@
 			<th>Sum of the rent (HUF)</th>
 			<th>Sum of the rent (EUR)</th>
 		
-			<tr>
-		
-				<td th:text="${local.name}" ></td>
-				<td th:text="${local.address}" ></td>
-				<td th:text="${local.rent}" ></td>
-				<td th:text="${EUR}" ></td>
-				
-		
-			</tr>
-		
-		</table>
-		
-		<br>
-		<br>
-		
-		<p>The contests of the selected location: </p>
-
-		<table>
+				<tr>
+					<td th:text="${local.name}" ></td>
+					<td th:text="${local.address}" ></td>
+					<td th:text="${local.rent}" ></td>
+					<td th:text="${EUR}" ></td>
 			
-				<th>Player 1:</th>
-				<th>Player 2:</th>
-				<th>Location:</th>
-				<th>Date</th>
-				<th>Result</th>
-				<th>Winner</th>
-				
-				<tr th:each="contests:${contestsList}" >
-				
-					<td th:text="${contests.player_1.username}" ></td>
-					<td th:text="${contests.player_2.username}" ></td>
-					<td th:text="${contests.location_id.name}" ></td>
-					<td th:text="${contests.date}" ></td>
-					<td th:text="${contests.result}" ></td>
-					<td th:text="${contests.winner.username}" ></td>
-				
 				</tr>
 		
 		</table>
 		
 		<br>
 		<br>
+		
+			<p>The contests of the selected location: </p>
+
+			<table>
+				
+					<th>Player 1:</th>
+					<th>Player 2:</th>
+					<th>Location:</th>
+					<th>Date</th>
+					<th>Result</th>
+					<th>Winner</th>
+					
+						<tr th:each="contests:${contestsList}" >
+						
+							<td th:text="${contests.player_1.username}" ></td>
+							<td th:text="${contests.player_2.username}" ></td>
+							<td th:text="${contests.location_id.name}" ></td>
+							<td th:text="${contests.date}" ></td>
+							<td th:text="${contests.result}" ></td>
+							<td th:text="${contests.winner.username}" ></td>
+						
+						</tr>
+			
+			</table>
+		
+		<br>
+		<br>
 	
 			<form action="/player" method="post">
-		   	 	<input type="hidden" name="username" th:value="${name}"/>
-		   		<input type="hidden" name="password" th:value="${pass}"/>
-		   	 <button>Go back</button>
+		   	 	
+		   		 <button>Go back</button>
 	    
 			</form>
 			
@@ -81,7 +78,7 @@
 			
 			<form action="/" method="get">
 		   	 	
-		    <button>Exit</button>
+		   		 <button>Exit</button>
 		    
 			</form>
 	

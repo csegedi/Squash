@@ -10,31 +10,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table (name="players")
+@Table(name = "players")
 public class Player {
-	
+
 	@Id
-	@Column (name="id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id; 
-	
-	@Column(name="username")
+	private int id;
+
+	@Column(name = "username")
 	private String username;
-	
-	@Column (name="password")
-	private String password; 
-	
-	@Column (name="status")
+
+	@Column(name = "password")
+	private String password;
+
+	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
-	private Player_Status status; 
-	
-	@Column (name="password_flag")
-	private boolean password_flag; 
-	
-	public Player () {
-		
+	private Player_Status status;
+
+	@Column(name = "password_flag")
+	private boolean password_flag;
+
+	public Player() {
+
 	}
-	
+
 	public Player(String username, String password, Player_Status status, boolean password_flag) {
 		super();
 		this.username = username;
@@ -67,7 +67,6 @@ public class Player {
 		this.password = password;
 	}
 
-
 	public Player_Status getStatus() {
 		return status;
 	}
@@ -88,6 +87,5 @@ public class Player {
 	public String toString() {
 		return "id:" + id + ", name:" + username + ", password";
 	}
-
 
 }
