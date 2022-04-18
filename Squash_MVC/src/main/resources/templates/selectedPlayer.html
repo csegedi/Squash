@@ -1,59 +1,43 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Selected Player</title>
-		
-		<style>
-		table, th, td {
-		border: 2px solid black;
-		border-collapse:collapse;
-		}
-		
-		</style>
-		
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<title>Selected Player</title>
+	<link rel="stylesheet" href="/css/squash_style.css" >
+	<link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+</head>
 	
-	<body>
-			<table>
-			
-				<th>Player 1:</th>
-				<th>Player 2:</th>
-				<th>Location:</th>
-				<th>Date</th>
-				<th>Result</th>
-				<th>Winner</th>
-				
-					<tr th:each="contests:${contestsList}" >
-					
-						<td th:text="${contests.player_1.username}" ></td>
-						<td th:text="${contests.player_2.username}" ></td>
-						<td th:text="${contests.location_id.name}" ></td>
-						<td th:text="${contests.date}" ></td>
-						<td th:text="${contests.result}" ></td>
-						<td th:text="${contests.winner.username}" ></td>
-					
-					</tr>
-		
-			</table>
-			
-			
-			<br>
-			<br>
-	
-			<form action="/player" method="post">
-		   	 
-		   	 	<button>Go back</button>
-	    
-			</form>
-			
-				<form action="/" method="get">
-		   	 	
-		    	<button>Exit</button>
-		    
-			</form>
-
-	</body>
-	
+<body>
+	<div class="head">
+		<form action="/" method="get">
+			<button><span class="material-icons">cancel</span></button>
+		</form>
+		<br>
+		<form action="/player" method="post"> 
+			<button><span class="material-icons">arrow_back_ios_new</span></button>
+		</form>
+	</div>	
+	<br>
+	<br>
+	<br>
+	<br>
+	<table>
+		<th>Player 1:</th>
+		<th>Player 2:</th>
+		<th>Location:</th>
+		<th>Date</th>
+		<th>Result</th>
+		<th>Winner</th>
+		<tr th:each="contests:${contestsList}" >
+			<td th:text="${contests.player_1.username}" ></td>
+			<td th:text="${contests.player_2.username}" ></td>
+			<td th:text="${contests.location_id.name}" ></td>
+			<td th:text="${contests.date}" ></td>
+			<td th:text="${contests.result}" ></td>
+			<td th:text="${contests.winner.username}" ></td>
+		</tr>
+	</table>
+</body>
 	
 </html>

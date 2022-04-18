@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+html{
+	font-family: 'Syne', sans-serif;
+}
+h3{
+	font-size: 4em;
+	letter-spacing:1em; 
+}
+h4{
+	font-size:1.2em; 
+}
+
+body{
+	background-image: url("/pictures/squash_background.jpg"); 
+	background-position:left bottom;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+}
+.head{
+	width:4%;
+	position:absolute;
+	top:2%;
+	right:0%; 
+}
+
+.button{
+	width:10%;
+	height:3em;
+	padding:2px;
+	background-color:rgb(153, 204, 255);
+	font-family: 'Syne', sans-serif;
+	font-weight:bold;
+	border-radius:10px; 
+}
+.button:hover {
+	color:white;
+}
+.button:active {
+	color:green; 
+}
+.textfield{
+	width:10%; 
+	height:3em;
+	background-color:rgb(224, 224, 235);
+	border-radius:10px; 
+	padding:0em; 
+}
+.container{
+	width:40%;
+	position:absolute;
+	left:32%; 
+	padding:5em; 
+}
+.container input{
+	width:70%; 
+}
+.container form{
+	border:2px solid rgb(153, 204, 255); 
+	border-radius:10px; 
+	width:60%; 
+	padding:2em; 
+}
+.error{
+	color:red; 
+	font-size:2em; 
+	text-align:center;
+}
+.confirm{
+	color:green;
+	font-size:2em;
+	text-align:center;
+}
+
+th{
+	background-color:rgb(224, 224, 235);
+	font-weight:bold;
+	font-size:1.2em; 
+}
+table{
+	margin-top:2em; 
+	width:100%; 
+}
+
+th, td, table{
+	border:0em; 
+	padding:0em; 
+	border-collapse:collapse;
+	text-align:left;
+}
+tr:nth-child(even) {
+	background-color:rgb(153, 204, 255);
+}
+.adminTable{
+	width:50%; 
+}

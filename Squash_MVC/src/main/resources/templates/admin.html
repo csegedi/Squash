@@ -1,97 +1,71 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Admin</title>
-	</head>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Admin</title>
+	<link rel="stylesheet" href="/css/squash_style.css" >
+	<link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+</head>
 	
-	<body>
-	
-		<h3 style="text-align:center"  >Welcome!</h3>
-		<h3 style="text-align:center"  th:text="${adminName}"></h3>
-	
-			<form action="admin/addLocation" method="post">
-			
-				<h4>Here you can add new locations to Database:</h4>
-	
-					<p>The name of the location:</p>
-						<input type="text" name="name">
-					
-						<br>
-					
-					<p>The address of the location:</p>
-						<input type="text" name="address">
-				
-						<br>
-					
-					<p>The rent  of the location (HUF):</p>
-						<input type="number" name="rent">
-						<br>
-						<br>
-					<input type="submit" >
-	
-			</form>
-			
+<body>
+	<div class="head">
+		<form action="/" method="get">
+		    <button><span class="material-icons">cancel</span></button>
+		</form>
+	</div>
+	<div class="container">
+		<form action="admin/addLocation" method="post">
+			<h4>Here you can add new locations to Database:</h4>
+			<p>The name of the location:</p>
+			<input class="textfield" type="text" name="name">
+			<br>
+			<p>The address of the location:</p>
+			<input class="textfield" type="text" name="address">
+			<br>
+			<p>The rent  of the location (HUF):</p>
+			<input class="textfield" type="number" name="rent">
 			<br>
 			<br>
-			
-			<form action="admin/addPlayer" method="post">
-			
-				<h4>Here you can add new players to Database:</h4>
-	
-					<p>The name of the players:</p>
-						<input type="text" name="playerName">
-					
-						<br>
-						<br>
-					
-							<input type="submit" >
-	
-			</form>
-			
+			<input class="button" type="submit" value="Submit" >
+		</form>
 			<br>
 			<br>
-			
-			<form action="admin/addContest" method="post">
-			
-				<h4>Here you can add new contests to Database:</h4>
-	
-					<p>The players:</p>
-					<p>player 1 </p>
-					<input type="number" name="player1_id">
-					<p>player 2 </p>
-					<input type="number" name="player2_id">
-					<p>The identifier number of the location </p>
-					<input type="number" name="location_id">
-					<p>The date of the contest <p>
-					<input type="date" name="date">
-					<p>The result </p>
-					<input type="text" name="result">
-					<p>And the winner is </p>
-					<input type="number" name="winner">
-					
-					<br>
-					
-					<input type="hidden" name="password" th:value="${password}">
-					<input type="hidden" name="adminName" th:value="${username}">
-					<br>
-					<input type="submit" >
-	
-			</form>
-			
-			
+		<form action="admin/addPlayer" method="post">
+			<h4>Here you can add new players to Database:</h4>
+			<p>The name of the player:</p>
+			<input class="textfield" type="text" name="playerName">
+			<br>
+			<br>
+			<input class="button" type="submit" value="Submit">
+		</form>
+			<br>
+			<br>
+		<form action="admin/addContest" method="post">
+			<h4>Here you can add new contests to Database:</h4>
+			<p>The players:</p>
+			<p>player 1 </p>
+			<input class="textfield" type="number" name="player1_id">
+			<p>player 2 </p>
+			<input class="textfield" type="number" name="player2_id">
+			<p>The identifier number of the location </p>
+			<input class="textfield" type="number" name="location_id">
+			<p>The date of the contest <p>
+			<input class="textfield" type="date" name="date">
+			<p>The result </p>
+			<input class="textfield" type="text" name="result">
+			<p>And the winner is </p>
+			<input class="textfield" type="number" name="winner">
+			<br>
+			<input type="hidden" name="password" th:value="${password}">
+			<input type="hidden" name="adminName" th:value="${username}">
+			<br>
+			<input class="button" type="submit" value="Submit" >
+		</form>
 			<br>
 			<br>	
-			
-			<form action="/" method="get">
-		   	 	
-		    <button>Exit</button>
-		    
-			</form>
-
-	</body>
-	
-	</body>
-	
+	</div>	
+</body>
 	
 </html>

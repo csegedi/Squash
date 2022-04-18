@@ -1,38 +1,30 @@
 <!DOCTYPE html>
 <html>
 
-
-	<head>
+<head>
+	<meta charset="UTF-8">
+	<title>Home</title>
+	<link rel="stylesheet" href="/css/squash_style.css" >
+	<link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet">
+</head>
 	
-		<meta charset="UTF-8">
-		<title>Home</title>
-	
-	</head>
-	
-	<body>
-	
-		<h3 style="text-align:center" >Welcome!</h3>
-	
-			<form action="/player" method="post">
-	
-				<p>username:</p>
-					<input type="text" name="username"  >
-			
-						<br>
-						<br>
-			
-				<p>password:</p>
-					<input type="text" name="password">
-						<br>
-						<br>
-			 				<input type="submit" formaction="/admin" value="Submit as Admin">
-						<br>
-						<br>
-							<input type="submit" value="Submit as Player">
-	
+<body>
+	<h3>Welcome!</h3>
+		<form action="/player" method="post">
+			<p>username:</p>
+			<input class="textfield" type="text" name="username" placeholder="username" >
+			<br>
+			<br>
+			<p>password:</p>
+			<input class="textfield" type="text" name="password" placeholder="password">
+			<br>
+			<br>
+			<br>
+			<input class="button" type="submit" formaction="/admin" value="Submit as Admin">
+			<br>
+			<br>
+			<input class="button" type="submit" value="Submit as Player">
 		</form>
-	
-	
-	</body>
+</body>
 
 </html>

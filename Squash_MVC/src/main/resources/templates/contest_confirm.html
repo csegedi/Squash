@@ -1,70 +1,46 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Confirmation Page</title>
-			
-			<style>
-				table, th, td {
-				border: 2px solid black;
-				border-collapse:collapse;
-				}
-		
-		</style>
-		
-		
-	</head>
-	
-	
-	<body>
-	
-		<p style="text-align:center" >Saving is completed!</p>
-			<br>
-				<p>You have saved the following data: </p>
-			<br>
-	
-			<table>
-	
-				<th>Player 1 id:</th>
-				<th>Player 2 id</th>
-				<th>Location id:</th>
-				<th>Date</th>
-				<th>Result</th>
-				<th>Winner</th>
-		
-				<tr>
-		
-					<td th:text="${contest.player_1.id}" ></td>
-					<td th:text="${contest.player_2.id}" ></td>
-					<td th:text="${contest.location_id.id}" ></td>
-					<td th:text="${contest.date}" ></td>
-					<td th:text="${contest.result}" ></td>
-					<td th:text="${contest.winner.id}" ></td>
-				
-				</tr>
-		
-			</table>
-		
-			<br>
-			<br>
-	
-				<form action="/admin" method="post">
-		   	 	
-		  	  		<button>Go back</button>
-	    
-				</form>
-			
-			<br>
-			<br>	
-			
-				<form action="/" method="get">
-			   	 	
-			   		 <button>Exit</button>
-			    
-				</form>
-			
 
-	</body>
-	
-	
+<head>
+	<meta charset="UTF-8">
+	<title>Confirmation Page</title>
+	<link rel="stylesheet" href="/css/squash_style.css" >
+	<link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">	
+</head>
+
+<body>
+	<div class="head">
+		<form action="/" method="get">
+		   <button><span class="material-icons">cancel</span></button>
+		</form>
+		<br>
+		<form action="/admin" method="post"> 
+			<button><span class="material-icons">arrow_back_ios_new</span></button>
+		</form>
+	</div>
+	<h4 class="confirm">Saving is completed!</h4>
+	<br>
+	<p>You have saved the following data: </p>
+	<br>
+	<table class=adminTable>
+		<th>Player 1 id:</th>
+		<th>Player 2 id</th>
+		<th>Location id:</th>
+		<th>Date</th>
+		<th>Result</th>
+		<th>Winner</th>
+		<tr>
+			<td th:text="${contest.player_1.id}" ></td>
+			<td th:text="${contest.player_2.id}" ></td>
+			<td th:text="${contest.location_id.id}" ></td>
+			<td th:text="${contest.date}" ></td>
+			<td th:text="${contest.result}" ></td>
+			<td th:text="${contest.winner.id}" ></td>
+		</tr>
+	</table>
+	<br>
+	<br>
+</body>
+		
 </html>

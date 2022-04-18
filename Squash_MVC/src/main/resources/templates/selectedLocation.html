@@ -1,89 +1,58 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Selected Location</title>
-		
-		<style>
-			table, th, td {
-			border: 2px solid black;
-			border-collapse:collapse;
-			}
-			
-			</style>
-	
-	</head>
 
-	
-	<body>
-	
-		<p>The data of the selected location: </p>
-	
-		<table>
-	
-			<th>Name of the location</th>
-			<th>The address of the location</th>
-			<th>Sum of the rent (HUF)</th>
-			<th>Sum of the rent (EUR)</th>
-		
-				<tr>
-					<td th:text="${local.name}" ></td>
-					<td th:text="${local.address}" ></td>
-					<td th:text="${local.rent}" ></td>
-					<td th:text="${EUR}" ></td>
-			
-				</tr>
-		
-		</table>
-		
-		<br>
-		<br>
-		
-			<p>The contests of the selected location: </p>
+<head>
+	<meta charset="UTF-8">
+	<title>Selected Location</title>
+	<link rel="stylesheet" href="/css/squash_style.css" >
+	<link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+</head>
 
-			<table>
-				
-					<th>Player 1:</th>
-					<th>Player 2:</th>
-					<th>Location:</th>
-					<th>Date</th>
-					<th>Result</th>
-					<th>Winner</th>
-					
-						<tr th:each="contests:${contestsList}" >
-						
-							<td th:text="${contests.player_1.username}" ></td>
-							<td th:text="${contests.player_2.username}" ></td>
-							<td th:text="${contests.location_id.name}" ></td>
-							<td th:text="${contests.date}" ></td>
-							<td th:text="${contests.result}" ></td>
-							<td th:text="${contests.winner.username}" ></td>
-						
-						</tr>
-			
-			</table>
-		
-		<br>
-		<br>
-	
-			<form action="/player" method="post">
-		   	 	
-		   		 <button>Go back</button>
-	    
+<body>
+	<div class="head">
+		<form action="/" method="get">
+			   <button><span class="material-icons">cancel</span></button>
 			</form>
-			
-			
-		<br>
-		<br>
-			
-			<form action="/" method="get">
-		   	 	
-		   		 <button>Exit</button>
-		    
-			</form>
-	
-	
-	</body>
-	
+			<br>
+			<form action="/player" method="post"> 
+				<button><span class="material-icons">arrow_back_ios_new</span></button>
+		</form>
+	</div>
+	<br>
+	<br>
+	<h4>The data of the selected location: </h4>
+	<table>
+		<th>Name of the location</th>
+		<th>The address of the location</th>
+		<th>Sum of the rent (HUF)</th>
+		<th>Sum of the rent (EUR)</th>
+		<tr>
+			<td th:text="${local.name}" ></td>
+			<td th:text="${local.address}" ></td>
+			<td th:text="${local.rent}" ></td>
+			<td th:text="${EUR}" ></td>
+		</tr>
+	</table>
+	<br>
+	<br>
+	<p>The contests of the selected location: </p>
+	<table>
+		<th>Player 1:</th>
+		<th>Player 2:</th>
+		<th>Location:</th>
+		<th>Date</th>
+		<th>Result</th>
+		<th>Winner</th>
+		<tr th:each="contests:${contestsList}" >
+			<td th:text="${contests.player_1.username}" ></td>
+			<td th:text="${contests.player_2.username}" ></td>
+			<td th:text="${contests.location_id.name}" ></td>
+			<td th:text="${contests.date}" ></td>
+			<td th:text="${contests.result}" ></td>
+			<td th:text="${contests.winner.username}" ></td>
+		</tr>
+	</table>
+</body>
 	
 </html>
